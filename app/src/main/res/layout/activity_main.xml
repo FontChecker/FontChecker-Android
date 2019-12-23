@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="captain.wonjong.fontchecker.model.TextModel" />
+            type="com.yujin.fontchecker.model.TextModel" />
     </data>
 
     <RelativeLayout
