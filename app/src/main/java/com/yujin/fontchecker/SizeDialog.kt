@@ -1,0 +1,60 @@
+package com.yujin.fontchecker
+
+import android.app.Dialog
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
+import com.yujin.fontchecker.databinding.LayoutSizeDialogBinding
+import com.yujin.fontchecker.model.SizeModel
+import java.lang.Exception
+
+object SizeDialog {
+    private var context: Context? = null
+    private var dialog: Dialog? = null
+    private var sizeModel: SizeModel? = null
+    private var binding: LayoutSizeDialogBinding? = null
+
+    val size: Int
+        get() = sizeModel?.size?.value ?: SizeModel.DEFAULT_SIZE
+
+    fun show(_context: Context): SizeDialog {
+        context = _context
+
+        sizeModel = SizeModel()
+        dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
+            setCanceledOnTouchOutside(true)
+        }
+
+        binding = DataBindingUtil.inflate(LayoutInflater.from(dialog?.context), R.layout.layout_size_dialog, null, false)
+        binding?.run {
+            setLifecycleOwner(context as LifecycleOwner)
+            model = sizeModel
+        }
+
+        dialog?.setContentView(binding?.root)
+
+        try {
+            dialog?.show()
+        } catch (e: Exception) {
+            dialog = null
+        } finally {
+            return this
+        }
+    }
+
+    fun onConfirm(onClickListener: (View) -> Unit): SizeDialog {
+        binding?.btnConfirm?.setOnClickListener(onClickListener)
+        return this
+    }
+
+    fun onCancel(onClickListener: (View) -> Unit): SizeDialog {
+        binding?.btnCancel?.setOnClickListener(onClickListener)
+        return this
+    }
+
+    fun dismiss() {
+        dialog?.dismiss()
+    }
+}
