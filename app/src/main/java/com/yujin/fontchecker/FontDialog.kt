@@ -26,9 +26,7 @@ object FontDialog : View.OnClickListener {
     fun show(_context: Context, _text: String?): FontDialog {
         context = _context
 
-        fontModel = FontModel().apply {
-            text.value = _text
-        }
+        fontModel = FontModel(_text)
         dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
             setCanceledOnTouchOutside(true)
         }
