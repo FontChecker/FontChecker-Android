@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v) {
-            binding.btnDelete -> textModel.text.value = ""
+            binding.btnDelete -> textModel.text.value = DEFAULT_TEXT
 
             binding.btnSettingBg ->
                 colorDialog.show(context)

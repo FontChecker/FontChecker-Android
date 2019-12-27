@@ -9,7 +9,7 @@ class ColorModel {
     val red = MutableLiveData(RGB_COLOR_MIN)
     val green = MutableLiveData(RGB_COLOR_MIN)
     val blue = MutableLiveData(RGB_COLOR_MIN)
-    val color = MutableLiveData(RGB_COLOR_MIN)
+    val color = MutableLiveData(rgb)
 
     private val rgb: Int
         get() = getRGB(red.value!!, green.value!!, blue.value!!)
