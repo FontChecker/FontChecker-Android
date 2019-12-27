@@ -1,9 +1,6 @@
 package com.yujin.fontchecker.util
 
-import android.text.TextWatcher
-import android.util.TypedValue
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.databinding.BindingAdapter
@@ -26,10 +23,5 @@ fun setTextColor(tv: TextView, @ColorInt color: Int) {
 
 @BindingAdapter("bind:setTextSize")
 fun setTextSize(tv: TextView, size: Int) {
-    tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size.toFloat())
-}
-
-@BindingAdapter("setTextWatcher")
-fun setTextWatcher(et: EditText, watcher: TextWatcher) {
-    et.addTextChangedListener(watcher)
+    tv.textSize = size.floatDp
 }
