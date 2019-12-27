@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import com.yujin.fontchecker.databinding.LayoutFontDialogBinding
 import com.yujin.fontchecker.model.FontModel
+import com.yujin.fontchecker.util.DEFAULT_FONT
 import java.lang.Exception
 
 object FontDialog : View.OnClickListener {
@@ -19,7 +20,7 @@ object FontDialog : View.OnClickListener {
     private var binding: LayoutFontDialogBinding? = null
 
     val font: Int
-        get() = fontModel?.font?.value ?: R.font.notosans_cjk_kr_regular
+        get() = fontModel?.font?.value ?: DEFAULT_FONT
     val fontRes: Typeface?
         get() = context?.let { context -> ResourcesCompat.getFont(context, font) }
 

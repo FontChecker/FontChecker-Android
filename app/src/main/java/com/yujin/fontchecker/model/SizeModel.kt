@@ -2,18 +2,10 @@ package com.yujin.fontchecker.model
 
 import android.widget.SeekBar
 import androidx.lifecycle.MutableLiveData
+import com.yujin.fontchecker.util.DEFAULT_TEXT_SIZE
 
-class SizeModel {
-    companion object {
-        const val DEFAULT_SIZE = 10
-    }
-
-    val size = MutableLiveData<Int>()
-
-    constructor() : this(DEFAULT_SIZE)
-    constructor(_size: Int) {
-        size.value = _size
-    }
+class SizeModel(_size: Int? = DEFAULT_TEXT_SIZE) {
+    val size = MutableLiveData<Int>(_size)
 
     fun onSizeProgressChanged(seekBar: SeekBar, progressValue: Int, fromUser: Boolean) {
         size.value = progressValue
