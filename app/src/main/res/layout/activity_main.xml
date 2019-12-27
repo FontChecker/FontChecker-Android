@@ -102,7 +102,7 @@
                     android:text="@{model.text}"
                     bind:setTextSize="@{model.textSize}"
                     bind:setTextColor="@{model.textColor}"
-                    bind:setBg="@{model.bgColor}" />
+                    bind:setBgColor="@{model.bgColor}" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
