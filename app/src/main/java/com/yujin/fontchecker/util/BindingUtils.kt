@@ -14,8 +14,8 @@ fun View.setVisibility(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.GONE
 }
 
-@BindingAdapter("bind:setBg")
-fun setBg(v: View, @ColorInt color: Int) {
+@BindingAdapter("bind:setBgColor")
+fun setBgColor(v: View, @ColorInt color: Int) {
     v.setBackgroundColor(color)
 }
 
