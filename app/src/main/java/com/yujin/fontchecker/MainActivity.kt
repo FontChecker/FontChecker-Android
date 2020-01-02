@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import com.yujin.fontchecker.databinding.ActivityMainBinding
 import com.yujin.fontchecker.model.TextModel
+import com.yujin.fontchecker.util.DEFAULT_TEXT
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val context: Context = this
