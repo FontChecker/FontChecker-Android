@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
 import com.yujin.fontchecker.databinding.LayoutSizeDialogBinding
 import com.yujin.fontchecker.model.SizeModel
+import com.yujin.fontchecker.util.DEFAULT_TEXT_SIZE
 import java.lang.Exception
 
 object SizeDialog {
@@ -17,7 +18,7 @@ object SizeDialog {
     private var binding: LayoutSizeDialogBinding? = null
 
     val size: Int
-        get() = sizeModel?.size?.value ?: SizeModel.DEFAULT_SIZE
+        get() = sizeModel?.size?.value ?: DEFAULT_TEXT_SIZE
 
     fun show(_context: Context): SizeDialog {
         context = _context

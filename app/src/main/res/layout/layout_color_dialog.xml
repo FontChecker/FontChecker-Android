@@ -35,7 +35,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_horizontal"
-                    bind:setBg="@{model.color}"/>
+                    bind:setBgColor="@{model.color}"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
