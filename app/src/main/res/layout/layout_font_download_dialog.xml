@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="com.yujin.fontchecker.model.FontFamilyModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="#fff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='폰트 : '
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{model.text}'
+                        android:typeface="@{model.fontFamily}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginVertical="24dp">
+                    <RadioGroup
+                        android:id="@+id/layout_font_family_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"/>
+                </ScrollView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/et_font_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="https://fonts.google.com/download?family=Nanum%20Gothic"
+                        android:layout_toLeftOf="@id/progress_bar"
+                        android:inputType="textUri"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="3dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/btn_download"
+                        android:visibility="invisible"/>
+
+                    <Button
+                        android:id="@+id/btn_download"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="다운로드"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e9e9e9" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:fontFamily="@font/notosans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.06"
+                    android:text="취소"
+                    android:textColor="#000"
+                    android:textSize="16dp"
+                    android:visibility="visible" />
+
+                <View
+                    android:id="@+id/v_common_dialog_bottom_boundary_line"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#e9e9e9"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#fff"
+                    android:fontFamily="@font/notosans_cjk_kr_regular"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.06"
+                    android:text="확인"
+                    android:textColor="#f00"
+                    android:textSize="16dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

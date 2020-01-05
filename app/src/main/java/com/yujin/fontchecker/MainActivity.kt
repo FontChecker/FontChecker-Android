@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val colorDialog = ColorDialog(this)
     private val sizeDialog = SizeDialog(this)
+    private val fontDownloadDialog = FontDownloadDialog(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             btnSettingBg.setOnClickListener(activity)
             btnSettingTextSize.setOnClickListener(activity)
             btnSettingTextColor.setOnClickListener(activity)
+            btnSettingFont.setOnClickListener(activity)
         }
     }
 
@@ -65,6 +67,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         .onCancel {
                             sizeDialog.dismiss()
                         }
+
+            binding.btnSettingFont ->
+                fontDownloadDialog.show(textModel.text.value)
+                        .onConfirm {
+                            textModel.typeface.value = fontDownloadDialog.fontFamily
+                            fontDownloadDialog.dismiss()
+                        }
+                        .onCancel { fontDownloadDialog.dismiss() }
         }
     }
 
