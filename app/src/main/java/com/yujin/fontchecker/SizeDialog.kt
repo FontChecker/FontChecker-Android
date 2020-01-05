@@ -11,8 +11,7 @@ import com.yujin.fontchecker.model.SizeModel
 import com.yujin.fontchecker.util.DEFAULT_TEXT_SIZE
 import java.lang.Exception
 
-object SizeDialog {
-    private var context: Context? = null
+class SizeDialog(private val context: Context) {
     private var dialog: Dialog? = null
     private var sizeModel: SizeModel? = null
     private var binding: LayoutSizeDialogBinding? = null
@@ -20,9 +19,7 @@ object SizeDialog {
     val size: Int
         get() = sizeModel?.size?.value ?: DEFAULT_TEXT_SIZE
 
-    fun show(_context: Context): SizeDialog {
-        context = _context
-
+    fun show(): SizeDialog {
         sizeModel = SizeModel()
         dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
             setCanceledOnTouchOutside(true)

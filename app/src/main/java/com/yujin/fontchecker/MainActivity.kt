@@ -1,6 +1,5 @@
 package com.yujin.fontchecker
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,13 +9,11 @@ import com.yujin.fontchecker.model.TextModel
 import com.yujin.fontchecker.util.DEFAULT_TEXT
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-    private val context: Context = this
     private lateinit var binding: ActivityMainBinding
     private val textModel = TextModel()
 
-    private val colorDialog = ColorDialog
-    private val sizeDialog = SizeDialog
-    private val fontDialog = FontDialog
+    private val colorDialog = ColorDialog(this)
+    private val sizeDialog = SizeDialog(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +28,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             btnDelete.setOnClickListener(activity)
             btnSettingBg.setOnClickListener(activity)
             btnSettingTextSize.setOnClickListener(activity)
-            btnSettingTextFont.setOnClickListener(activity)
             btnSettingTextColor.setOnClickListener(activity)
         }
     }
@@ -41,7 +37,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.btnDelete -> textModel.text.value = DEFAULT_TEXT
 
             binding.btnSettingBg ->
-                colorDialog.show(context)
+                colorDialog.show()
                         .onConfirm {
                             textModel.bgColor.value = colorDialog.color
                             colorDialog.dismiss()
@@ -51,7 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         }
 
             binding.btnSettingTextColor ->
-                colorDialog.show(context)
+                colorDialog.show()
                         .onConfirm {
                             textModel.textColor.value = colorDialog.color
                             colorDialog.dismiss()
@@ -61,23 +57,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         }
 
             binding.btnSettingTextSize ->
-                sizeDialog.show(this)
+                sizeDialog.show()
                         .onConfirm {
                             textModel.textSize.value = sizeDialog.size
                             sizeDialog.dismiss()
                         }
                         .onCancel {
                             sizeDialog.dismiss()
-                        }
-
-            binding.btnSettingTextFont ->
-                fontDialog.show(context, textModel.text.value)
-                        .onConfirm {
-                            binding.tvOutput.typeface = fontDialog.fontRes
-                            fontDialog.dismiss()
-                        }
-                        .onCancel {
-                            fontDialog.dismiss()
                         }
         }
     }
