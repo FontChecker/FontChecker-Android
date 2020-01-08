@@ -9,8 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.yujin.fontchecker.databinding.LayoutColorDialogBinding
 import com.yujin.fontchecker.model.ColorModel
 
-object ColorDialog {
-    private var context: Context? = null
+class ColorDialog(private val context: Context) {
     private var dialog: Dialog? = null
     private var colorModel: ColorModel? = null
     private var binding: LayoutColorDialogBinding? = null
@@ -24,9 +23,7 @@ object ColorDialog {
     val blue: Int?
         get() = colorModel?.blue?.value
 
-    fun show(_context: Context): ColorDialog {
-        context = _context
-
+    fun show() {
         colorModel = ColorModel()
         dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
             setCanceledOnTouchOutside(true)
@@ -38,25 +35,21 @@ object ColorDialog {
             model = colorModel
         }
 
-        dialog?.setContentView(binding?.root)
+        dialog?.setContentView(binding!!.root)
 
         try {
             dialog?.show()
         } catch (e: Exception) {
             dialog = null
-        } finally {
-            return this
         }
     }
 
-    fun onConfirm(onClickListener: (View) -> Unit): ColorDialog {
+    fun onConfirm(onClickListener: (View) -> Unit) {
         binding?.btnConfirm?.setOnClickListener(onClickListener)
-        return this
     }
 
-    fun onCancel(onClickListener: (View) -> Unit): ColorDialog {
+    fun onCancel(onClickListener: (View) -> Unit) {
         binding?.btnCancel?.setOnClickListener(onClickListener)
-        return this
     }
 
     fun dismiss() {

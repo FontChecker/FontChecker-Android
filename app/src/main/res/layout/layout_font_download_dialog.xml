@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="model"
-            type="com.yujin.fontchecker.model.FontModel" />
+            type="com.yujin.fontchecker.model.FontFamilyModel" />
     </data>
 
     <RelativeLayout
@@ -33,65 +32,61 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
+                    android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="폰트 : "
-                        android:textColor="#000"
-                        android:textSize="20dp" />
-
+                        android:text='폰트 : '
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp" />
                     <TextView
-                        android:id="@+id/tv_font"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{model.text}"
-                        android:textColor="#000"
-                        android:textSize="20dp"/>
+                        android:text='@{model.text}'
+                        android:typeface="@{model.fontFamily}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
-                <LinearLayout
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginVertical="24dp">
+                    <RadioGroup
+                        android:id="@+id/layout_font_family_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"/>
+                </ScrollView>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/et_font_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="https://fonts.google.com/download?family=Nanum%20Gothic"
+                        android:layout_toLeftOf="@id/progress_bar"
+                        android:inputType="textUri"/>
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_margin="3dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/btn_download"
+                        android:visibility="invisible"/>
 
                     <Button
-                        android:id="@+id/btn_light"
+                        android:id="@+id/btn_download"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="light"
-                        android:textSize="15dp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/notosans_cjk_kr_light"
-                        android:includeFontPadding="false"/>
-
-                    <Button
-                        android:id="@+id/btn_regular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="regular"
-                        android:textSize="15dp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/notosans_cjk_kr_regular"
-                        android:includeFontPadding="false"/>
-
-                    <Button
-                        android:id="@+id/btn_bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:text="bold"
-                        android:textSize="15dp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/notosans_cjk_kr_bold"
-                        android:includeFontPadding="false"/>
-                </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="다운로드"/>
+                </RelativeLayout>
             </LinearLayout>
 
             <View

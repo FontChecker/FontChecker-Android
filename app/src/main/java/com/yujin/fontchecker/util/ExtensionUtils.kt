@@ -12,3 +12,9 @@ val Int.floatDp: Float
     get() = this * (Resources.getSystem().displayMetrics.density)
 val Float.floatDp: Float
     get() = this * (Resources.getSystem().displayMetrics.density)
+
+
+val String.isFontFile: Boolean
+    get() = this.endsWith(".ttf") || this.endsWith(".otf")
+val String.isZipFile: Boolean
+    get() = this.endsWith(".zip")

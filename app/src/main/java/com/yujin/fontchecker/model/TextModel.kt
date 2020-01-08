@@ -1,5 +1,6 @@
 package com.yujin.fontchecker.model
 
+import android.graphics.Typeface
 import androidx.lifecycle.MutableLiveData
 import com.yujin.fontchecker.util.DEFAULT_TEXT
 import com.yujin.fontchecker.util.DEFAULT_TEXT_SIZE
@@ -11,4 +12,5 @@ class TextModel(_text: String? = DEFAULT_TEXT, _textSize: Int? = DEFAULT_TEXT_SI
     val bgColor = MutableLiveData<Int>(RGB_WHITE)
     val textColor = MutableLiveData<Int>(RGB_BLACK)
     val textSize = MutableLiveData<Int>(_textSize)
+    val typeface = MutableLiveData<Typeface>()
 }

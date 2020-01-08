@@ -41,20 +41,11 @@
 
 
         <LinearLayout
-            android:id="@+id/ll_setting_container"
+            android:id="@+id/ll_setting_container_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/ll_input_container"
+            android:layout_above="@id/ll_setting_container_bottom"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_setting_text_font"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:text="폰트변경"
-                android:textColor="#000"
-                android:textSize="15dp" />
 
             <Button
                 android:id="@+id/btn_setting_bg"
@@ -84,10 +75,45 @@
                 android:textSize="15dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_setting_container_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ll_input_container"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_setting_font"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="폰트변경"
+                android:textColor="#000"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/btn_setting_letter_spacing"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="자간조정"
+                android:textColor="#000"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/btn_setting_line_height"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="행간조정"
+                android:textColor="#000"
+                android:textSize="15dp" />
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/ll_setting_container">
+            android:layout_above="@id/ll_setting_container_top">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,11 +124,11 @@
                     android:id="@+id/tv_output"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="@{model.text}"
-                    bind:setTextSize="@{model.textSize}"
+                    android:typeface="@{model.typeface}"
+                    bind:setBgColor="@{model.bgColor}"
                     bind:setTextColor="@{model.textColor}"
-                    bind:setBgColor="@{model.bgColor}" />
+                    bind:setTextSize="@{model.textSize}" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
