@@ -13,6 +13,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.yujin.fontchecker.databinding.LayoutFontDownloadDialogBinding
 import com.yujin.fontchecker.model.FontFamilyModel
 import com.yujin.fontchecker.util.*
+import io.reactivex.disposables.CompositeDisposable
 import java.io.*
 import java.lang.Exception
 
@@ -20,6 +21,7 @@ class FontDownloadDialog(private val context: Context) : View.OnClickListener {
     private var dialog: Dialog? = null
     private var fontFamilyModel: FontFamilyModel? = null
     private var binding: LayoutFontDownloadDialogBinding? = null
+    private val compositeDisposable = CompositeDisposable()
 
     private val fontFolder by lazy { context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) }
     private val fontFolderPath by lazy { "${fontFolder?.absolutePath}${File.separator}" }
@@ -59,18 +61,22 @@ class FontDownloadDialog(private val context: Context) : View.OnClickListener {
     }
 
     fun dismiss() {
+        compositeDisposable.clear()
         dialog?.dismiss()
     }
 
     private fun fontDownload(url: String) {
         progressDownload(true)
-        val isSuccess = FontDownloader(fontFolderPath).execute(url).get()
-        if (isSuccess) {
-            setFontList()
-        } else {
-            Toast.makeText(context, "다운로드에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+        FontDownloader.downloadFontFile(url, fontFolderPath)?.subscribe { isSuccess ->
+            if (isSuccess) {
+                setFontList()
+            } else {
+                Toast.makeText(context, "다운로드에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            }
+            progressDownload(false)
+        }?.let {
+            compositeDisposable.add(it)
         }
-        progressDownload(false)
     }
 
     private fun progressDownload(isStart: Boolean) {
@@ -82,8 +88,11 @@ class FontDownloadDialog(private val context: Context) : View.OnClickListener {
     }
 
     private fun setFontList() {
-        val fontList = FontFileLoader(fontFolderPath).execute().get()
-        setFontListRadio(fontList)
+        FontFileLoader.loadFontFile(fontFolderPath)?.subscribe { fontList ->
+            setFontListRadio(fontList)
+        }?.let {
+            compositeDisposable.add(it)
+        }
     }
 
     private fun setFontListRadio(fontList: List<String>) {

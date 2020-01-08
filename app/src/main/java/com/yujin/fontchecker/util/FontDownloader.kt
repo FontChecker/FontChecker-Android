@@ -1,19 +1,18 @@
 package com.yujin.fontchecker.util
 
-import android.os.AsyncTask
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import java.io.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 import java.net.URL
 
 
-class FontDownloader(private val fontFolderPath: String) : AsyncTask<String, Unit, Boolean>() {
-    companion object {
-        private const val DEFAULT_INDEX = 0
-        private const val FONT_FILE_NAME = "fonts.zip"
-    }
+object FontDownloader {
+    private const val FONT_FILE_NAME = "fonts.zip"
 
-    private fun fontDownload(downloadUrl: String? = DEFAULT_TEXT): Boolean {
+    private fun fontDownload(downloadUrl: String? = DEFAULT_TEXT, fontFolderPath: String? = DEFAULT_TEXT): Boolean {
         try {
             val url = URL(downloadUrl)
             val connection = url.openConnection()
@@ -38,11 +37,10 @@ class FontDownloader(private val fontFolderPath: String) : AsyncTask<String, Uni
             e.printStackTrace()
             return false
         }
-
-        return unZip()
+        return true
     }
 
-    private fun unZip(): Boolean {
+    private fun unZip(fontFolderPath: String? = DEFAULT_TEXT): Boolean {
         val zipFiles = File(fontFolderPath).listFiles().filter { it.name.isZipFile }
 
         for (zipFile in zipFiles) {
@@ -76,9 +74,9 @@ class FontDownloader(private val fontFolderPath: String) : AsyncTask<String, Uni
         return true
     }
 
-    override fun doInBackground(vararg params: String?): Boolean {
-        val downloadUrl = params[DEFAULT_INDEX]
-        return fontDownload(downloadUrl)
-    }
+    fun downloadFontFile(downloadUrl: String, fontFolderPath: String) = Observable.fromCallable {
+        fontDownload(downloadUrl, fontFolderPath) && unZip(fontFolderPath)
+    }.subscribeOn(Schedulers.io())
+     .observeOn(AndroidSchedulers.mainThread()) ?: null
 
 }

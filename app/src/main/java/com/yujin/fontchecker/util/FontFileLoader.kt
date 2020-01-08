@@ -1,8 +1,13 @@
 package com.yujin.fontchecker.util
 
-import android.os.AsyncTask
-import java.io.*
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.io.File
 
-class FontFileLoader(private val fontFolderPath: String) : AsyncTask<Unit, Unit, List<String>>() {
-    override fun doInBackground(vararg params: Unit?) = File(fontFolderPath).listFiles().filter { it.name.isFontFile }.map { it.name }
+object FontFileLoader {
+    fun loadFontFile(fontFolderPath: String) = Observable.fromCallable {
+                File(fontFolderPath).listFiles().filter { it.name.isFontFile }.map { it.name }
+            }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread()) ?: null
 }
