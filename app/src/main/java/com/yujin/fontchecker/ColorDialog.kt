@@ -23,7 +23,7 @@ class ColorDialog(private val context: Context) {
     val blue: Int?
         get() = colorModel?.blue?.value
 
-    fun show(): ColorDialog {
+    fun show() {
         colorModel = ColorModel()
         dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
             setCanceledOnTouchOutside(true)
@@ -41,19 +41,15 @@ class ColorDialog(private val context: Context) {
             dialog?.show()
         } catch (e: Exception) {
             dialog = null
-        } finally {
-            return this
         }
     }
 
-    fun onConfirm(onClickListener: (View) -> Unit): ColorDialog {
+    fun onConfirm(onClickListener: (View) -> Unit) {
         binding?.btnConfirm?.setOnClickListener(onClickListener)
-        return this
     }
 
-    fun onCancel(onClickListener: (View) -> Unit): ColorDialog {
+    fun onCancel(onClickListener: (View) -> Unit) {
         binding?.btnCancel?.setOnClickListener(onClickListener)
-        return this
     }
 
     fun dismiss() {

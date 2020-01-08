@@ -27,7 +27,7 @@ class FontDownloadDialog(private val context: Context) : View.OnClickListener {
     val fontFamily: Typeface?
         get() = fontFamilyModel?.fontFamily?.value
 
-    fun show(_text: String?): FontDownloadDialog {
+    fun show(_text: String?) {
         fontFamilyModel = FontFamilyModel(_text)
         dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
             setCanceledOnTouchOutside(true)
@@ -47,19 +47,15 @@ class FontDownloadDialog(private val context: Context) : View.OnClickListener {
             dialog?.show()
         } catch (e: Exception) {
             dialog = null
-        } finally {
-            return this
         }
     }
 
-    fun onConfirm(onClickListener: (View) -> Unit): FontDownloadDialog {
+    fun onConfirm(onClickListener: (View) -> Unit) {
         binding?.btnConfirm?.setOnClickListener(onClickListener)
-        return this
     }
 
-    fun onCancel(onClickListener: (View) -> Unit): FontDownloadDialog {
+    fun onCancel(onClickListener: (View) -> Unit) {
         binding?.btnCancel?.setOnClickListener(onClickListener)
-        return this
     }
 
     fun dismiss() {
@@ -98,15 +94,27 @@ class FontDownloadDialog(private val context: Context) : View.OnClickListener {
     }
 
     private fun createFontRadio(font: String) = RadioButton(context).apply {
+        val radioTypeface = getTypefaceFromFile(font)
+
         text = font
+        typeface = radioTypeface
         setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                val fontFile = File("${fontFolderPath}${buttonView.text}")
-                if (fontFile.exists()) {
-                    fontFamilyModel?.fontFamily?.value = Typeface.createFromFile(fontFile)
-                }
+                fontFamilyModel?.fontFamily?.value = radioTypeface
             }
         }
+    }
+
+    private fun getTypefaceFromFile(fileName: String): Typeface? {
+        val fontFile = File("${fontFolderPath}${fileName}")
+        try {
+            if (fontFile.exists()) {
+                return Typeface.createFromFile(fontFile)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     override fun onClick(v: View?) {

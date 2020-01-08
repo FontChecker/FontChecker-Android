@@ -19,7 +19,7 @@ class SizeDialog(private val context: Context) {
     val size: Int
         get() = sizeModel?.size?.value ?: DEFAULT_TEXT_SIZE
 
-    fun show(): SizeDialog {
+    fun show() {
         sizeModel = SizeModel()
         dialog = Dialog(context, R.style.ChangeDialogStyle).apply {
             setCanceledOnTouchOutside(true)
@@ -37,19 +37,15 @@ class SizeDialog(private val context: Context) {
             dialog?.show()
         } catch (e: Exception) {
             dialog = null
-        } finally {
-            return this
         }
     }
 
-    fun onConfirm(onClickListener: (View) -> Unit): SizeDialog {
+    fun onConfirm(onClickListener: (View) -> Unit) {
         binding?.btnConfirm?.setOnClickListener(onClickListener)
-        return this
     }
 
-    fun onCancel(onClickListener: (View) -> Unit): SizeDialog {
+    fun onCancel(onClickListener: (View) -> Unit) {
         binding?.btnCancel?.setOnClickListener(onClickListener)
-        return this
     }
 
     fun dismiss() {

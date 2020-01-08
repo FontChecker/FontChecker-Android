@@ -39,42 +39,50 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.btnDelete -> textModel.text.value = DEFAULT_TEXT
 
             binding.btnSettingBg ->
-                colorDialog.show()
-                        .onConfirm {
-                            textModel.bgColor.value = colorDialog.color
-                            colorDialog.dismiss()
-                        }
-                        .onCancel {
-                            colorDialog.dismiss()
-                        }
+                colorDialog.apply {
+                    show()
+                    onConfirm {
+                        textModel.bgColor.value = colorDialog.color
+                        colorDialog.dismiss()
+                    }
+                    onCancel {
+                        colorDialog.dismiss()
+                    }
+                }
 
             binding.btnSettingTextColor ->
-                colorDialog.show()
-                        .onConfirm {
-                            textModel.textColor.value = colorDialog.color
-                            colorDialog.dismiss()
-                        }
-                        .onCancel {
-                            colorDialog.dismiss()
-                        }
+                colorDialog.apply {
+                    show()
+                    onConfirm {
+                        textModel.textColor.value = colorDialog.color
+                        colorDialog.dismiss()
+                    }
+                    onCancel {
+                        colorDialog.dismiss()
+                    }
+                }
 
             binding.btnSettingTextSize ->
-                sizeDialog.show()
-                        .onConfirm {
-                            textModel.textSize.value = sizeDialog.size
-                            sizeDialog.dismiss()
-                        }
-                        .onCancel {
-                            sizeDialog.dismiss()
-                        }
+                sizeDialog.apply {
+                    show()
+                    onConfirm {
+                        textModel.textSize.value = sizeDialog.size
+                        sizeDialog.dismiss()
+                    }
+                    onCancel {
+                        sizeDialog.dismiss()
+                    }
 
+                }
             binding.btnSettingFont ->
-                fontDownloadDialog.show(textModel.text.value)
-                        .onConfirm {
-                            textModel.typeface.value = fontDownloadDialog.fontFamily
-                            fontDownloadDialog.dismiss()
-                        }
-                        .onCancel { fontDownloadDialog.dismiss() }
+                fontDownloadDialog.apply {
+                    show(textModel.text.value)
+                    onConfirm {
+                        textModel.typeface.value = fontDownloadDialog.fontFamily
+                        fontDownloadDialog.dismiss()
+                    }
+                    onCancel { fontDownloadDialog.dismiss() }
+                }
         }
     }
 
